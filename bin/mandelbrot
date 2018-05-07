@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'mandelbrot'
+require 'io/console'
+
+rows, columns = STDIN.winsize
+
+m = Mandelbrot.new columns, rows
+
+m.draw
+
+m.image.each do |row|
+  line = row.map do |score|
+    "\e[48;5;#{232 + score}m "
+  end
+
+  line << "\e[0m"
+
+  puts line.join
+end
+
