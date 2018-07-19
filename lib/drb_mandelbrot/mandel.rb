@@ -8,11 +8,9 @@ class DRbMandelbrot::Mandel
 
   def run
     loop do
-      y, x, c = @points.deq
+      height, width, y = @points.deq
 
-      score = mandel c, @max
-
-      @image.fill y, x, score
+      mandel_row height, width, y
     end
   end
 
@@ -24,6 +22,26 @@ class DRbMandelbrot::Mandel
 
       break score if z.magnitude > 2
     end
+  end
+
+  def mandel_row height, width, y
+    i = scale y, height, 3, -1.5
+
+    row = width.times.map do |x|
+      r = scale x, width, 3, -2
+
+      c = Complex r, i
+
+      score = mandel c, @max
+
+      score
+    end
+
+    @image.fill_row y, row
+  end
+
+  def scale(val, input_range, output_range, offset)
+    val.to_f / input_range * output_range + offset
   end
 
 end

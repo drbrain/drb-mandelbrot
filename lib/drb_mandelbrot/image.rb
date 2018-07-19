@@ -1,20 +1,22 @@
 class DRbMandelbrot::Image
-  def initialize width, height
-    @image = Array.new height do
-      Array.new width
-    end
+  def initialize height
+    @image = Array.new height
 
+    @filled_mutex = Mutex.new
     @filled = 0
-    @total  = width * height
+    @total  = height
   end
 
   def complete?
     @total == @filled
   end
 
-  def fill y, x, score
-    @image[y][x] = score
-    @filled += 1
+  def fill_row y, row
+    @image[y] = row
+
+    @filled_mutex.synchronize do
+      @filled += 1
+    end
   end
 
   def draw output
