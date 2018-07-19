@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'drb_mandelbrot'
+require 'io/console'
+
+rows, columns = STDIN.winsize
+
+m = DRbMandelbrot.new columns, rows
+
+trap :TERM do
+  m.shutdown
+
+  exit 1
+end
+
+trap :INT do
+  m.shutdown
+
+  exit 1
+end
+
+m.draw
+
+m.shutdown
