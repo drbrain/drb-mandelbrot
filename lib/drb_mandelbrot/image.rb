@@ -31,5 +31,7 @@ class DRbMandelbrot::Image
 
       puts line.join
     end
+
+    nil
   end
 end
