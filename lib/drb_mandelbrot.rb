@@ -30,7 +30,7 @@ class DRbMandelbrot
     pid = fork do
       $0 = "drb_mandelbrot: mandel"
 
-      DRb.start_service nil, nil
+      DRb.start_service "druby://127.0.0.1:0", nil
 
       Thread.new do
         Thread.current.report_on_exception = false
@@ -53,7 +53,7 @@ class DRbMandelbrot
 
       image = DRbMandelbrot::Image.new @height
 
-      DRb.start_service nil, image
+      DRb.start_service "druby://127.0.0.1:0", image
 
       drb_image = DRb::DRbObject.new image
 
@@ -70,7 +70,7 @@ class DRbMandelbrot
   end
 
   def draw
-    DRb.start_service nil, nil
+    DRb.start_service "druby://127.0.0.1:0", nil
 
     Thread.new do
       DRb.thread.join
