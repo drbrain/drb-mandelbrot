@@ -37,10 +37,11 @@ class DRbMandelbrot::Mandel
       score
     end
 
+    p fill_row: y
     @image.fill_row y, row
   end
 
-  def scale(val, input_range, output_range, offset)
+  def scale val, input_range, output_range, offset
     val.to_f / input_range * output_range + offset
   end
 

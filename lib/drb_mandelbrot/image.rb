@@ -12,6 +12,7 @@ class DRbMandelbrot::Image
   end
 
   def fill_row y, row
+    p filling: y
     @image[y] = row
 
     @filled_mutex.synchronize do

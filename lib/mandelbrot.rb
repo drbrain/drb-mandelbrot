@@ -31,7 +31,7 @@ class Mandelbrot
     end
   end
 
-  def scale(val, input_range, output_range, offset)
+  def scale val, input_range, output_range, offset
     val.to_f / input_range * output_range + offset
   end
 
