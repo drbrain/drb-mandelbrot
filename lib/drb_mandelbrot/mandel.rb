@@ -37,7 +37,6 @@ class DRbMandelbrot::Mandel
       score
     end
 
-    p fill_row: y
     @image.fill_row y, row
   end
 
